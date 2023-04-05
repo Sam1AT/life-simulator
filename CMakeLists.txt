@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 3.25)
+project(AP_midterm_project)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(.)
+
+add_executable(AP_midterm_project
+        main.cpp Genome.h Genome.cpp)
