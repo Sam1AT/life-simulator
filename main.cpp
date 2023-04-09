@@ -1,11 +1,14 @@
 #include <iostream>
-#include "Genome.h"
-
+#include "Cell.h"
+#include "vector"
 int main(){
-    Genome g1;
-    g1.getRNA("AGTTTACGCTA");
-    g1.getDNA("AAGTCTCAGT","TTCAGAGTCA");
-    g1.makeDNA();
+    Cell k;
+    k.add(1);
+    k.jahesh_K_DNA("T","A",2,0);
+
+
+
+
 
 
 

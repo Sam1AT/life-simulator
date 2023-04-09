@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 14)
 include_directories(.)
 
 add_executable(AP_midterm_project
-        main.cpp Genome.h Genome.cpp)
+        main.cpp Cell.cpp)
