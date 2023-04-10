@@ -6,7 +6,7 @@
 #include "Cell.h"
 
 class Animal : Cell{
-
+public:
 float tashaboh_jenetici(Animal);
 
 
@@ -15,4 +15,4 @@ float tashaboh_jenetici(Animal);
 
 
 
-#endif //AP_MIDTERM_PROJECT_CELL_H
+#endif //AP_MIDTERM_PROJECT_ANIMAL_H
