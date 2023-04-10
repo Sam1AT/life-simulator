@@ -71,7 +71,7 @@ void Genome::jahesh_M_DNA(string S1) {
             S2+="G";
         }
     }
-    size_t pos1,pos2;
+    size_t pos1,pos2;                                   
     pos1=DNA1.find(S1);
     pos2=DNA2.find(S1);
     if(pos1<pos2){
