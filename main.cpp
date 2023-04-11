@@ -8,7 +8,8 @@ int main(){
     //k.add(1);
    // k.jahesh_K_DNA("T","A",2,0);
     Animal sam , ali;
-    cout << sam.tashaboh_jenetici(ali);
+
+    cout << sam.cell_simularity(ali);
 
 
 

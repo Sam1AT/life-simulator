@@ -7,7 +7,7 @@
 
 class Animal : Cell{
 public:
-float tashaboh_jenetici(Animal);
+float smith_waterman(string , string , int , int , int );
 
 
 };
