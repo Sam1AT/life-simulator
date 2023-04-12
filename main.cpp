@@ -12,14 +12,15 @@ int main(){
     //k.add(1);
    // k.jahesh_K_DNA("T","A",2,0);
     Animal sam , ali;
-    sam.c.add(1);
-    ali.c.add(1);
+    sam.c.add(3);
+    //ali.c.add(1);
     string s1 = "GCATGCU";
     string s2 = "GATTACA";
 
-    int percentage = sam.simularity(ali);
+    //int percentage = sam.simularity(ali);
 
-    cout << "Score: " << (sam == ali);
+    //cout << "Score: " << (sam == ali);
+    Animal s = sam.asexual_reproduction();
 
     return 0;
 }

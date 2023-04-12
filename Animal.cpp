@@ -2,6 +2,11 @@
 #include <string>
 #include <vector>
 #include "Animal.h"
+#include <time.h>
+#include <cstdlib>
+#include <algorithm>
+#include <random>
+
 using namespace std;
 
 
@@ -53,8 +58,33 @@ return sum_per/(m * n);
 
 bool Animal::operator ==(const Animal& obj)
 {
-
-return (this->simularity(obj) >= 70)? 1 : 0;
-
+return (this->simularity(obj) > 70)? 1 : 0;
 }
 
+Animal Animal::asexual_reproduction()
+{
+    srand(time(0));
+
+    vector<Genome> doubleCromozom = this->c.CHR;
+    Animal tmp;
+    for(int i=0; i < this->c.CHR.size() ; i++)
+    {
+        doubleCromozom.push_back(this->c.CHR[i]);
+    }
+
+while(1)
+{
+    for(int i=0; i < this->c.CHR.size() ; i++)
+    {
+        int rand_num = rand()%doubleCromozom.size();
+        tmp.c.CHR.push_back(doubleCromozom[rand_num]);
+        doubleCromozom.erase(doubleCromozom.begin() + rand_num);
+    }
+    if(this->simularity(tmp) > 70)
+    {
+        break;
+    }
+}
+
+    return tmp;
+}

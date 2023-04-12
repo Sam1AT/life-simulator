@@ -13,6 +13,7 @@ public:
 Cell c;
 float simularity(Animal);
 bool operator ==(Animal const& obj);
+Animal asexual_reproduction();
 friend class Cell;
 friend class Genome;
 
