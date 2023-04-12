@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <algorithm>
 #include <random>
-
+#include <chrono>
 using namespace std;
 
 
@@ -89,6 +89,45 @@ while(1)
         return tmp;
     }
 }
+ 
+}
 
-    
+
+
+Animal Animal::operator +(const Animal& obj) 
+{
+    Animal tmp = obj;
+    Animal obj1 = this->asexual_reproduction();
+    Animal obj2 = tmp.asexual_reproduction();
+while(1)
+{
+      Animal child;
+    vector<Genome> obj1_cp = obj1.c.CHR;
+    vector<Genome> obj2_cp = obj2.c.CHR;
+
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine e(seed);
+
+    shuffle(obj1_cp.begin(), obj1_cp.end(), e);
+    shuffle(obj2_cp.begin(), obj2_cp.end(), e);
+
+    for(int i=0; i < obj1.c.CHR.size()/2;i++)
+    {
+        cout << "man injam baraye bar : " << i +1 << endl;
+        child.c.CHR.push_back(obj1.c.CHR[i]);
+        child.c.CHR.push_back(obj2.c.CHR[i]);
+    }
+
+    if(child.simularity(obj1) > 70 && child.simularity(obj2) > 70)
+    {
+        cout << "injaye" <<child.c.CHR.size() <<endl;
+        return child;
+    }
+
+}
+  
+
+
+
+
 }
