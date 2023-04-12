@@ -82,13 +82,10 @@ while(1)
         int rand_num = rand()%doubleCromozom.size();
         tmp.c.CHR.push_back(doubleCromozom[rand_num]);
         doubleCromozom.erase(doubleCromozom.begin() + rand_num);
-        cout <<"man injam ! ! !" << endl;
     }
     cout << this->simularity(tmp);
     if(this->simularity(tmp) > 70)
     {
-        cout <<"man injam ! ! ! !" << endl;
-
         return tmp;
     }
 }
