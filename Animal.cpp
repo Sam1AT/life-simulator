@@ -64,27 +64,34 @@ return (this->simularity(obj) > 70)? 1 : 0;
 Animal Animal::asexual_reproduction()
 {
     srand(time(0));
+            cout <<"man injam !" << endl;
+    
+    cout <<"man injam ! !" << endl;
 
-    vector<Genome> doubleCromozom = this->c.CHR;
+while(1)
+{
     Animal tmp;
+    vector<Genome> doubleCromozom = this->c.CHR;
     for(int i=0; i < this->c.CHR.size() ; i++)
     {
         doubleCromozom.push_back(this->c.CHR[i]);
     }
 
-while(1)
-{
     for(int i=0; i < this->c.CHR.size() ; i++)
     {
         int rand_num = rand()%doubleCromozom.size();
         tmp.c.CHR.push_back(doubleCromozom[rand_num]);
         doubleCromozom.erase(doubleCromozom.begin() + rand_num);
+        cout <<"man injam ! ! !" << endl;
     }
+    cout << this->simularity(tmp);
     if(this->simularity(tmp) > 70)
     {
-        break;
+        cout <<"man injam ! ! ! !" << endl;
+
+        return tmp;
     }
 }
 
-    return tmp;
+    
 }
