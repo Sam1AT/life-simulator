@@ -7,9 +7,14 @@
 using namespace std;
 
 class Animal : Cell{
-public:
+private:
 float smith_waterman(string, string);
-
+public:
+Cell c;
+float simularity(Animal);
+bool operator ==(Animal const& obj);
+friend class Cell;
+friend class Genome;
 
 };
 

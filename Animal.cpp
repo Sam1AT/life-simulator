@@ -5,7 +5,7 @@
 using namespace std;
 
 
-float smith_waterman(string s1, string s2) {
+float Animal::smith_waterman(string s1, string s2) {
     int n = s1.length();
     int m = s2.length();
     const int MATCH_SCORE = 3;
@@ -34,3 +34,27 @@ float smith_waterman(string s1, string s2) {
     delete[] matrix;
     return max_score / 12 * 100 / max(s1.length() , s2.length()) * 4;
 }
+
+float Animal::simularity(Animal s)
+{
+    int m = this->c.CHR.size();
+    int n = s.c.CHR.size();
+    long long sum_per=0;
+    for(int i=0; i < m;i++)
+    {
+        for(int j=0 ; j < n;j++)
+        {
+            sum_per += max(smith_waterman(this->c.CHR[i].DNA2 , s.c.CHR[j].DNA2) , max(smith_waterman(this->c.CHR[i].DNA1 , s.c.CHR[j].DNA2) , max(smith_waterman(this->c.CHR[i].DNA2 , s.c.CHR[j].DNA1) , smith_waterman(this->c.CHR[i].DNA1 , s.c.CHR[j].DNA1))));
+        }
+    }
+
+return sum_per/(m * n);
+}
+
+bool Animal::operator ==(const Animal& obj)
+{
+
+return (this->simularity(obj) >= 70)? 1 : 0;
+
+}
+

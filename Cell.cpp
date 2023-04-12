@@ -243,8 +243,8 @@ void Cell::add(int n) {
         cin>>t;
         j.DNA1=k;
         j.DNA2=t;
-    CHR.push_back(j);
-}
+        CHR.push_back(j);
+    }
 }
 
 
