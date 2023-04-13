@@ -239,7 +239,9 @@ void Cell::add(int n) {
     Genome j;
     for(int p=0;p<n;p++){
         string t,k;
+        cout << p+1 << " Chrmosome , " << "Enter your First DNA sequence" << endl;
         cin>>k;
+        cout << "Enter your Second DNA sequence" << endl;
         cin>>t;
         j.DNA1=k;
         j.DNA2=t;
