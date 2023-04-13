@@ -162,11 +162,38 @@ while(option != "0")
             cout << "! ! !   Enter a valid Nucleotide   ! ! !"<<endl;
             goto c;
         }
-        AnimalList[stoi(n) - 1]->c.jahesh_K_DNA(a, b , stoi(c) , stoi(d));
+        AnimalList[stoi(n) - 1]->c.jahesh_K_DNA(a, b , stoi(c) , stoi(d) - 1);
     }
     else if(option == "6")
     {
-
+        cout <<"Choose the animal that you want to make a mutation on it" << endl;
+        listAllAnimals(AnimalName);
+        y:
+        getValidValue(n); // validating the value 
+        if(stoi(n) > AnimalList.size() || stoi(n) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto y;
+        }
+        
+        cout << "First enter the sequence then number of chromosome and repeat this for second one : (exp : AT TA 2 3)";
+        f:
+        string a,b,c,d;
+        getValidSequence(a);
+        getValidSequence(b);
+        getValidValue(c);
+        getValidValue(d);
+        if(stoi(d) > AnimalList[stoi(n) - 1]->c.CHR.size() || stoi(d) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto f;
+        }
+        if(stoi(c) > AnimalList[stoi(n) - 1]->c.CHR.size() || stoi(c) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto f;
+        }
+        AnimalList[stoi(n) - 1]->c.jahesh_B_DNA(a,stoi(c) - 1   , b  , stoi(d) - 1);
     }
     else if(option == "7")
     {
