@@ -54,7 +54,7 @@ void getValidSequence(string &s)
     cin >> s;
         while(!validateSequence(s))
         {
-            cout << "! ! !  Invalid sequence you must only use ATGC in your RNA or DNA  ! ! !" << endl;
+            cout << "! ! !  Invalid sequence. you must only use ATGC in your RNA or DNA  ! ! !" << endl;
             cin >> s;
         }
 }
@@ -72,7 +72,7 @@ int main(){
     cout << "|                       Welcome to the class of life app                       |" << endl;
     cout << "|                                 Authors :                                    |" << endl;
     cout << "|                           Sam Ahmadizadeh Tourzani                           |" << endl;
-    cout << "|                           Elnaz                                              |" << endl;
+    cout << "|                           Elnaz Abbas Nejad                                  |" << endl;
     cout << "--------------------------------------------------------------------------------";
 
 while(option != "0")
@@ -87,6 +87,8 @@ while(option != "0")
     cout << "6) Big mutation." << endl;
     cout << "7) Reversed mutation." << endl;
     cout << "8) Finding all the palindroms of a Chromosome." << endl;
+    cout << "9) Detail about a specefic animal." << endl;
+
     cout << "*** For exit please enter 0 ***" << endl;
     cout << "--------------------------------------------------------------------------------" << endl;
     cout << "->";
@@ -134,6 +136,33 @@ while(option != "0")
     else if(option == "5")
     {
 
+        cout <<"Choose the animal that you want to make a mutation on it" << endl;
+        listAllAnimals(AnimalName);
+        b:
+        getValidValue(n); // validating the value 
+        if(stoi(n) > AnimalList.size() || stoi(n) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto b;
+        }
+        
+        cout << "First enter the letter you want to be replaced then the letter that you want to raplace after all the times you want to replace and the number of Chromosome :(exp:A C 3 4) ";
+        c:
+        string a,b,c,d;
+        cin >> a >> b;
+        getValidValue(c);
+        getValidValue(d);
+        if(stoi(d) > AnimalList[stoi(n) - 1]->c.CHR.size() || stoi(d) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto c;
+        }
+        if((a != "A" && a != "T" && a != "G" && a!="c") || (b != "A" && b != "T" && b != "G" && b != "c"))
+        {
+            cout << "! ! !   Enter a valid Nucleotide   ! ! !"<<endl;
+            goto c;
+        }
+        AnimalList[stoi(n) - 1]->c.jahesh_K_DNA(a, b , stoi(c) , stoi(d));
     }
     else if(option == "6")
     {
@@ -142,6 +171,36 @@ while(option != "0")
     else if(option == "7")
     {
 
+    }
+    else if(option == "8")
+    {
+
+    }
+    else if(option == "9")
+    {
+        cout <<"Choose the animal that you want to see the details: (Enter a number)" << endl;
+        listAllAnimals(AnimalName);
+        q:
+        getValidValue(n); // validating the value 
+        if(stoi(n) > AnimalList.size() || stoi(n) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto q;
+        }
+        cout << "Animal name : " << AnimalName[stoi(n) - 1] << endl;
+        cout << "Chromosome count : " << AnimalList[stoi(n) - 1]->c.CHR.size() << endl;
+        cout << "Do you want to see details about it chromosomes ?(y/n)" << endl;
+        char opt;
+        cin >> opt;
+        if(opt == 'y' || opt == 'Y')
+        {
+            for(int i=0;i < AnimalList[stoi(n) - 1]->c.CHR.size();i++)
+            {
+                cout << i+1 << " Chromosome : "<<endl;
+                cout<<"   The first DNA seq is : " <<AnimalList[stoi(n) - 1]->c.CHR[i].DNA1 << endl;
+                cout<<"   The second DNA seq is : " <<AnimalList[stoi(n) - 1]->c.CHR[i].DNA2 << endl;
+            }
+        }
     }
     else if(option != "0" || !isNumber(option))
     {

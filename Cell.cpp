@@ -163,8 +163,8 @@ void Genome ::jahesh_K_DNA(string S1,string S2, int n) {
             }
         }
     }
-    cout<<DNA1<<endl;
-    cout<<DNA2<<endl;
+    cout<<"The replace DNA1 is : "<<DNA1<<endl;
+    cout<<"The replace DNA2 is : "<<DNA2<<endl;
 }
 
 
