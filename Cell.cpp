@@ -28,8 +28,8 @@ void Genome::makeDNA(){
             DNA+="G";
         }
     }
-    cout<<RNA<<endl;
-    cout<<DNA<<endl;
+    cout<<"Your RNA is : " << RNA <<endl;
+    cout<<"The DNA from RNA above is : "<<DNA<<endl;
 }
 
 void Genome::jahesh_M_RNA(string S1) {

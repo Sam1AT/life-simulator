@@ -9,7 +9,7 @@ using namespace std;
 bool isNumber(const string& s)
 {
     for (char const &ch : s) {
-        if (std::isdigit(ch) == 0) 
+        if (isdigit(ch) == 0) 
             return false;
     }
     return true;
@@ -17,13 +17,47 @@ bool isNumber(const string& s)
 
 void listAllAnimals(vector<string> s)
 {
+
     for(int i=0; i < s.size(); i++)
     {
         cout << i + 1 <<") " << s[i] << endl;
     }
+    if(s.size() == 0)
+        cout << "! ! !   No animal is added yet   ! ! ! ";
+    cout << endl;
 }
 
 
+void getValidValue(string &n)
+{
+
+    cin >> n;
+    while(!isNumber(n))
+    {
+        cout << "! ! !   Invalid argument enter a number  ! ! !" << endl;
+        cin >> n;
+    }
+
+}
+
+bool validateSequence(string seq)
+{
+    for (char const &ch : seq) {
+        if (ch != 'A' && ch != 'T' && ch != 'C' && ch != 'G') 
+            return false;
+    }
+    return true;
+ }
+
+void getValidSequence(string &s)
+{
+    cin >> s;
+        while(!validateSequence(s))
+        {
+            cout << "! ! !  Invalid sequence you must only use ATGC in your RNA or DNA  ! ! !" << endl;
+            cin >> s;
+        }
+}
  /////////////////////////////////////////////////////////////
 
 
@@ -43,6 +77,7 @@ int main(){
 
 while(option != "0")
 {
+    cout << "--------------------------------------------------------------------------------" << endl;
     cout<<"Please choose one of the options below (Enter a number): "<<endl;
     cout << "1) List of Animals." << endl;
     cout << "2) Making a new animal." << endl;
@@ -54,7 +89,7 @@ while(option != "0")
     cout << "8) Finding all the palindroms of a Chromosome." << endl;
     cout << "*** For exit please enter 0 ***" << endl;
     cout << "--------------------------------------------------------------------------------" << endl;
-
+    cout << "->";
     cin >> option;
     if(option == "1")
     {
@@ -70,22 +105,31 @@ while(option != "0")
         AnimalList.push_back(tmp);
         cout << "How many Chromosomes you want to add to your animals' cell?" << endl;
         cout << "(After giving your number write your DNA sequences)" << endl;
-        cin >> n;
-        while(!isNumber(n))
-        {
-            cout << "! ! !   Invalid argument   ! ! !" << endl;
-            cin >> n;
-        }
+        getValidValue(n); // validating the value 
         tmp->c.add(stoi(n));
         cout << "Animal added ! ! !" << endl;
     }
     else if(option == "3")
     {
-
+        listAllAnimals(AnimalName);
+        cout << "Which animal you want to choose?";
+        a:
+        getValidValue(n); // validating the value 
+        if(stoi(n) > AnimalList.size() || stoi(n) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto a;
+        }
+        AnimalList[stoi(n) - 1]->c.add(1);
+        cout << "Chromosome added ! ! !" << endl;
     }
     else if(option == "4")
     {
-
+        cout << "Enter your RNA sequence: ";
+        getValidSequence(n);
+        Genome seqc;
+        seqc.getRNA(n);
+        seqc.makeDNA();
     }
     else if(option == "5")
     {
