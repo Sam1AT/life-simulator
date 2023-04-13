@@ -18,9 +18,10 @@ int main(){
     string s2 = "GATTACA";
 
     //int percentage = sam.simularity(ali);
-    cout <<"main runed 1 "<< endl;
+    //cout <<"main runed 1 "<< endl;
     //cout << "Score: " << (sam == ali);
-    Animal s = ali + sam;
+    //Animal s = ali + sam;
+    sam.death();
     return 0;
 }
 

@@ -125,9 +125,13 @@ while(1)
     }
 
 }
-  
-
-
-
-
 }
+  
+void Animal::death()
+{
+    this->c.death();
+    cout << "Done !";   
+}
+
+
+
