@@ -18,6 +18,19 @@ Animal asexual_reproduction();
 void death();
 friend class Cell;
 friend class Genome;
+friend class Virus;
+
+
+};
+
+
+class Virus : Genome{
+public:
+Genome r;
+bool canInfect(Animal*);
+
+friend class Animal;
+
 
 };
 

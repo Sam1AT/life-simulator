@@ -135,3 +135,47 @@ void Animal::death()
 
 
 
+bool Virus::canInfect(Animal* a)
+{
+    vector<string> substrings;
+    substrings = a->c.getInterAll();
+
+    struct compare {
+    inline bool operator()(const std::string& first,
+            const std::string& second) const
+    {
+        return first.size() < second.size();
+    }
+};
+
+    
+compare c;
+sort(substrings.begin(), substrings.end(), c);
+
+
+cout << "The chromosome inc common substrings are : ";
+    for(int i=0; i < substrings.size() ; i++)
+        cout << substrings[i] << " ";
+    cout << endl;
+vector<string> biggestSS;
+int len = substrings[substrings.size() - 1].length();
+int looplen = len;
+for(int i=substrings.size() - 1 ; looplen == len;i--)
+{
+    biggestSS.push_back(substrings[i]);
+    looplen = substrings[i - 1].length();
+}
+cout << "The biggest substrings are : ";
+for(int i=0; i < biggestSS.size() ; i++)
+    cout << biggestSS[i] << " ";
+cout << endl;
+
+vector<string> ans;
+ans = eshterak(this->r.findSubstrings() , biggestSS);
+cout << "The in common substrings are : ";
+for(int i=0; i < ans.size() ; i++)
+    cout << ans[i] << " ";
+cout << endl;
+return (ans.size() != 0)?  1 :  0;
+
+}
