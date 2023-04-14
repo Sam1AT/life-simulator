@@ -27,6 +27,19 @@ void listAllAnimals(vector<string> s)
     cout << endl;
 }
 
+void listAllViruses(vector<string> s , vector<Virus*> all)
+{
+
+    for(int i=0; i < s.size(); i++)
+    {
+        cout << i + 1 <<") " << s[i] ;
+        cout <<" RNA: ";
+        cout<< all[i]->r.RNA << endl;
+    }
+    if(s.size() == 0)
+        cout << "! ! !   No virus is added yet   ! ! ! ";
+    cout << endl;
+}
 
 void getValidValue(string &n)
 {
@@ -67,6 +80,9 @@ int main(){
     string AnimalNametmp;
     vector<string> AnimalName;
     vector<Animal*> AnimalList;
+    string VirusNametmp;
+    vector<string> VirusName;
+    vector<Virus*> VirusList;
 
     cout << "--------------------------------------------------------------------------------";
     cout << "|                       Welcome to the class of life app                       |" << endl;
@@ -88,7 +104,9 @@ while(option != "0")
     cout << "7) Reversed mutation." << endl;
     cout << "8) Finding all the palindroms of a Chromosome." << endl;
     cout << "9) Detail about a specefic animal." << endl;
-
+    cout << "10) List of Viruses." << endl;
+    cout << "11) Making a new Virus." << endl;
+    cout << "12) Check Virus infection." << endl;
     cout << "*** For exit please enter 0 ***" << endl;
     cout << "--------------------------------------------------------------------------------" << endl;
     cout << "->";
@@ -197,7 +215,7 @@ while(option != "0")
     }
     else if(option == "7")
     {
-
+        
     }
     else if(option == "8")
     {
@@ -228,6 +246,23 @@ while(option != "0")
                 cout<<"   The second DNA seq is : " <<AnimalList[stoi(n) - 1]->c.CHR[i].DNA2 << endl;
             }
         }
+    }
+    else if(option == "10")
+    {
+        listAllViruses(VirusName , VirusList);
+    }
+    else if(option == "11")
+    {
+        cout << "Choose a name for your virus(it could also include whitespaces)"  << endl;
+        cin.ignore();
+        getline(cin , VirusNametmp);
+        Virus* tmpv = new Virus;
+        VirusName.push_back(VirusNametmp);
+        VirusList.push_back(tmpv);
+        cout << "Enter a RNA sequence for your virus: ";
+        getValidSequence(n);
+        tmpv->r.getRNA(n);
+        cout << "Virus added ! ! !" << endl;
     }
     else if(option != "0" || !isNumber(option))
     {
