@@ -8,13 +8,15 @@ using namespace std;
 
 class Animal : Cell{
 private:
-float smith_waterman(string, string);
+float findStringSimilarity(string , string );
+int getEditDistance(string , string );
+
 public:
 Cell c;
-float simularity(Animal);
-bool operator ==(Animal const& obj);
-Animal operator +(Animal const& obj);
-Animal asexual_reproduction();
+float simularity(Animal*);
+bool operator ==(Animal* obj);
+Animal* operator +(Animal* obj);
+Animal* asexual_reproduction();
 void death();
 friend class Cell;
 friend class Genome;
