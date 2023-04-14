@@ -76,7 +76,7 @@ void getValidSequence(string &s)
 
 int main(){
     string option = "10";
-    string n;
+    string n,n2;
     string AnimalNametmp;
     vector<string> AnimalName;
     vector<Animal*> AnimalList;
@@ -263,6 +263,38 @@ while(option != "0")
         getValidSequence(n);
         tmpv->r.getRNA(n);
         cout << "Virus added ! ! !" << endl;
+    }
+     else if(option == "12")
+    {
+       cout <<"Choose the animal that you want to check infection for it" << endl;
+        listAllAnimals(AnimalName);
+        oi:
+        getValidValue(n); // validating the value 
+        if(stoi(n) > AnimalList.size() || stoi(n) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto oi;
+        }
+
+        cout <<"Choose the animal that you want to check infection for it" << endl;
+        listAllViruses(VirusName , VirusList);
+        io:
+        getValidValue(n2); // validating the value 
+        if(stoi(n2) > VirusList.size() || stoi(n2) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto io;
+        }
+
+    if(VirusList[stoi(n2)-1]->canInfect(AnimalList[stoi(n)-1]))
+    {
+        cout << "+ + +  It infects it  + + +";
+    }  
+    else 
+    {
+        cout << "- - -   It doesn't infect it   - - -";
+    }
+        cout << endl;
     }
     else if(option != "0" || !isNumber(option))
     {
