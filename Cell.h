@@ -5,7 +5,9 @@
 #include <vector>
 
 class Genome {
-private:
+protected:
+friend std::vector<std::string> eshterak(std::vector<std::string> vector1, std::vector<std::string> vector2);
+std::vector<std::string> findSubstrings();
 
 public:
     std::string DNA1,DNA2;
@@ -19,9 +21,9 @@ public:
     void jahesh_K_DNA(std::string,std::string ,int);
     void jahesh_B_RNA(std::string,std::string);
     void jahesh_B_DNA(std::string,std::string);
-    std::vector<std::string> findSubstrings();
-
+    
     friend class Cell;
+    friend class Virus;
 
 
 
@@ -29,14 +31,17 @@ public:
 
 class Cell : Genome
 {public:
-   std::vector<Genome> CHR;
-   void add(int);
-   void death();
-   void jahesh_B_DNA(std::string,int,std::string,int  );
-   void jahesh_K_DNA(std::string,std::string ,int,int);
+    std::vector<Genome> CHR;
+    void add(int);
+    void death();
+    void jahesh_B_DNA(std::string,int,std::string,int  );
+    void jahesh_K_DNA(std::string,std::string ,int,int);
+    std::vector<std::string> getInterAll();
+
     private:
     bool validateSequence(std::string seq);
     void getValidSequence(std::string &s);
+
    friend class Animal;
     };
 

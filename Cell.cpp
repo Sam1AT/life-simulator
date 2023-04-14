@@ -239,6 +239,37 @@ vector<string> Genome::findSubstrings()
 }
 
 
+
+
+///////////////////////////////////////////////////////
+
+vector<string> eshterak(vector<string> vector1, vector<string> vector2)
+{
+    vector<string> ans;
+    sort(vector1.begin(), vector1.end());
+    sort(vector2.begin(), vector2.end());
+
+    vector<string> v(vector1.size() + vector2.size());
+    vector<string>::iterator it, st;
+
+    it = set_intersection(vector1.begin(),
+                          vector1.end(),
+                          vector2.begin(),
+                          vector2.end(),
+                          v.begin());
+
+    
+    for (st = v.begin(); st != it; ++st)
+        ans.push_back(*st);
+
+    return ans;
+
+
+}
+
+
+//////////////////////////////////////////////////////
+
 bool Cell::validateSequence(string seq)
 {
     for (char const &ch : seq) {
@@ -429,3 +460,18 @@ void Cell::jahesh_B_DNA(string S1,int n, string S2, int m) {
             cout<<CHR[m].DNA1<<endl;
             cout<<CHR[m].DNA2<<endl;
         }
+
+
+vector<string> Cell::getInterAll()
+{
+    vector<string> ans;
+    ans = this->CHR[0].findSubstrings();
+    for(int i=1; i < this->CHR.size(); i++)
+        ans = eshterak(ans , this->CHR[i].findSubstrings());
+
+    sort( ans.begin(), ans.end() );
+    ans.erase( unique( ans.begin(), ans.end() ), ans.end() );
+    
+    return ans;
+
+}
