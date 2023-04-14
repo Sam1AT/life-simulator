@@ -2,6 +2,7 @@
 #include "Cell.h"
 #include <string>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
 void Genome::getDNA(string a,string b){
@@ -205,6 +206,38 @@ void Genome::jahesh_B_DNA(string S1, string S2) {
     cout<<DNA1<<endl;
     cout<<DNA2<<endl;
 }
+
+vector<string> Genome::findSubstrings()
+{
+    string str = this->DNA1;
+    vector<string> ans;
+    for (int i = 0; i < str.length(); i++) {
+        string subStr;
+        for (int j = i; j < str.length(); j++) {
+            subStr += str[j];
+            ans.push_back(subStr);
+        }
+    }
+    str = this->DNA2;
+    for (int i = 0; i < str.length(); i++) {
+        string subStr;
+        for (int j = i; j < str.length(); j++) {
+            subStr += str[j];
+            ans.push_back(subStr);
+        }
+    }
+
+    str = this->RNA;
+    for (int i = 0; i < str.length(); i++) {
+        string subStr;
+        for (int j = i; j < str.length(); j++) {
+            subStr += str[j];
+            ans.push_back(subStr);
+        }
+    }
+    return ans;
+}
+
 
 bool Cell::validateSequence(string seq)
 {

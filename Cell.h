@@ -5,6 +5,8 @@
 #include <vector>
 
 class Genome {
+private:
+
 public:
     std::string DNA1,DNA2;
     std::string RNA;
@@ -17,7 +19,8 @@ public:
     void jahesh_K_DNA(std::string,std::string ,int);
     void jahesh_B_RNA(std::string,std::string);
     void jahesh_B_DNA(std::string,std::string);
-   
+    std::vector<std::string> findSubstrings();
+
     friend class Cell;
 
 
