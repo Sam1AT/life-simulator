@@ -67,7 +67,7 @@ void getValidSequence(string &s)
     cin >> s;
         while(!validateSequence(s))
         {
-            cout << "! ! !  Invalid sequence. you must only use ATGC in your RNA or DNA  ! ! !" << endl;
+            cout << "! ! !  Invalid strand. you must only use ATGC in your RNA or DNA  ! ! !" << endl;
             cin >> s;
         }
 }
@@ -107,6 +107,8 @@ while(option != "0")
     cout << "10) List of Viruses." << endl;
     cout << "11) Making a new Virus." << endl;
     cout << "12) Check Virus infection." << endl;
+    cout << "13) Check the simularity between two animal." << endl;
+
     cout << "*** For exit please enter 0 ***" << endl;
     cout << "--------------------------------------------------------------------------------" << endl;
     cout << "->";
@@ -124,7 +126,7 @@ while(option != "0")
         AnimalName.push_back(AnimalNametmp);
         AnimalList.push_back(tmp);
         cout << "How many Chromosomes you want to add to your animals' cell?" << endl;
-        cout << "(After giving your number write your DNA sequences)" << endl;
+        cout << "(After giving your number write your DNA strands)" << endl;
         getValidValue(n); // validating the value 
         tmp->c.add(stoi(n));
         cout << "Animal added ! ! !" << endl;
@@ -145,7 +147,7 @@ while(option != "0")
     }
     else if(option == "4")
     {
-        cout << "Enter your RNA sequence: ";
+        cout << "Enter your RNA strand: ";
         getValidSequence(n);
         Genome seqc;
         seqc.getRNA(n);
@@ -194,7 +196,7 @@ while(option != "0")
             goto y;
         }
         
-        cout << "First enter the sequence then number of chromosome and repeat this for second one : (exp : AT TA 2 3)";
+        cout << "First enter the strand then number of chromosome and repeat this for second one : (exp : AT TA 2 3)";
         f:
         string a,b,c,d;
         getValidSequence(a);
@@ -259,7 +261,7 @@ while(option != "0")
         Virus* tmpv = new Virus;
         VirusName.push_back(VirusNametmp);
         VirusList.push_back(tmpv);
-        cout << "Enter a RNA sequence for your virus: ";
+        cout << "Enter a RNA strand for your virus: ";
         getValidSequence(n);
         tmpv->r.getRNA(n);
         cout << "Virus added ! ! !" << endl;
@@ -276,7 +278,7 @@ while(option != "0")
             goto oi;
         }
 
-        cout <<"Choose the animal that you want to check infection for it" << endl;
+        cout <<"Choose the Virus that you want to check infection for it" << endl;
         listAllViruses(VirusName , VirusList);
         io:
         getValidValue(n2); // validating the value 
@@ -295,6 +297,32 @@ while(option != "0")
         cout << "- - -   It doesn't infect it   - - -";
     }
         cout << endl;
+    }
+    else if(option == "13")
+    {
+        cout <<"Choose the first animal" << endl;
+        listAllAnimals(AnimalName);
+        ooo:
+        getValidValue(n); // validating the value 
+        if(stoi(n) > AnimalList.size() || stoi(n) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto ooo;
+        }
+
+        cout <<"Choose the Second one" << endl;
+        listAllAnimals(AnimalName);
+        ooi:
+        getValidValue(n2); // validating the value 
+        if(stoi(n2) > AnimalList.size() || stoi(n2) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto ooi;
+        }
+
+
+
+        cout << "The simularity is : " << AnimalList[stoi(n) - 1]->simularity(AnimalList[stoi(n2) - 1])<<" percent." << endl;
     }
     else if(option != "0" || !isNumber(option))
     {
