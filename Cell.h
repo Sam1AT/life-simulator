@@ -17,7 +17,7 @@ public:
     void jahesh_K_DNA(std::string,std::string ,int);
     void jahesh_B_RNA(std::string,std::string);
     void jahesh_B_DNA(std::string,std::string);
-    friend class Animal;
+   
     friend class Cell;
 
 
@@ -31,6 +31,9 @@ class Cell : Genome
    void death();
    void jahesh_B_DNA(std::string,int,std::string,int  );
    void jahesh_K_DNA(std::string,std::string ,int,int);
+    private:
+    bool validateSequence(std::string seq);
+    void getValidSequence(std::string &s);
    friend class Animal;
     };
 

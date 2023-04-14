@@ -206,6 +206,24 @@ void Genome::jahesh_B_DNA(string S1, string S2) {
     cout<<DNA2<<endl;
 }
 
+bool Cell::validateSequence(string seq)
+{
+    for (char const &ch : seq) {
+        if (ch != 'A' && ch != 'T' && ch != 'C' && ch != 'G') 
+            return false;
+    }
+    return true;
+ }
+
+void Cell::getValidSequence(string &s)
+{
+    cin >> s;
+        while(!validateSequence(s))
+        {
+            cout << "! ! !  Invalid sequence. you must only use ATGC in your RNA or DNA  ! ! !" << endl;
+            cin >> s;
+        }
+}
 
 void Cell::death()
 {
@@ -240,9 +258,9 @@ void Cell::add(int n) {
     for(int p=0;p<n;p++){
         string t,k;
         cout << p+1 << " Chrmosome , " << "Enter your First DNA sequence" << endl;
-        cin>>k;
+        getValidSequence(k);
         cout << "Enter your Second DNA sequence" << endl;
-        cin>>t;
+        getValidSequence(t);
         j.DNA1=k;
         j.DNA2=t;
         CHR.push_back(j);
