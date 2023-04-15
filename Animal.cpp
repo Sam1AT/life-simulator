@@ -54,19 +54,25 @@ float Animal::findStringSimilarity(string first, string second) {
 
 float Animal::simularity(Animal s)
 {
+    cout << "Im here" << endl;
     int m = this->c.CHR.size();
     int n = s.c.CHR.size();
     vector<float> awnsers;
 
     for(int i=0; i < m;i++)
     {
+            cout << "Im here ! ! !" << endl;
+
         float sum_per = 0;
 
         for(int j=0 ; j < n;j++)
         {
+                cout << "Im here 2" << endl;
+
             sum_per = max(sum_per , max(findStringSimilarity(this->c.CHR[i].DNA2 , s.c.CHR[j].DNA2) , max(findStringSimilarity(this->c.CHR[i].DNA1 , s.c.CHR[j].DNA2) , max(findStringSimilarity(this->c.CHR[i].DNA2 , s.c.CHR[j].DNA1) , findStringSimilarity(this->c.CHR[i].DNA1 , s.c.CHR[j].DNA1)))));
             
         }
+        cout << "per sm is : " << sum_per << endl;
         awnsers.push_back(sum_per);
     }
 float sumMax = 0;
@@ -84,7 +90,8 @@ return (this->simularity(obj) > 70)? 1 : 0;
 
 Animal Animal::asexual_reproduction()
 {
-    srand(time(0));
+   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine e(seed);
             cout <<"man injam !" << endl;
     
     cout <<"man injam ! !" << endl;
@@ -99,15 +106,14 @@ while(1)
     {
         doubleCromozom.push_back(this->c.CHR[i]);
     }
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::default_random_engine e(seed);
+    
 
     shuffle(doubleCromozom.begin(), doubleCromozom.end(), e);
 
     for(int i=0;i < this->c.CHR.size();i++)
         tmp.c.CHR.push_back(doubleCromozom[i]);
 
-    cout << this->simularity(tmp);
+    cout << this->simularity(tmp) << endl;
     if(this->simularity(tmp) > 70)
     {
         return tmp;
