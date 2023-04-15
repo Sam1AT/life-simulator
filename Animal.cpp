@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <random>
 #include <chrono>
+#include <thread>
+
 using namespace std;
 
 int Animal::getEditDistance(string first, string second)
@@ -50,10 +52,10 @@ float Animal::findStringSimilarity(string first, string second) {
     return 1.0;
 }
 
-float Animal::simularity(Animal* s)
+float Animal::simularity(Animal s)
 {
     int m = this->c.CHR.size();
-    int n = s->c.CHR.size();
+    int n = s.c.CHR.size();
     vector<float> awnsers;
 
     for(int i=0; i < m;i++)
@@ -62,7 +64,7 @@ float Animal::simularity(Animal* s)
 
         for(int j=0 ; j < n;j++)
         {
-            sum_per = max(sum_per , max(findStringSimilarity(this->c.CHR[i].DNA2 , s->c.CHR[j].DNA2) , max(findStringSimilarity(this->c.CHR[i].DNA1 , s->c.CHR[j].DNA2) , max(findStringSimilarity(this->c.CHR[i].DNA2 , s->c.CHR[j].DNA1) , findStringSimilarity(this->c.CHR[i].DNA1 , s->c.CHR[j].DNA1)))));
+            sum_per = max(sum_per , max(findStringSimilarity(this->c.CHR[i].DNA2 , s.c.CHR[j].DNA2) , max(findStringSimilarity(this->c.CHR[i].DNA1 , s.c.CHR[j].DNA2) , max(findStringSimilarity(this->c.CHR[i].DNA2 , s.c.CHR[j].DNA1) , findStringSimilarity(this->c.CHR[i].DNA1 , s.c.CHR[j].DNA1)))));
             
         }
         awnsers.push_back(sum_per);
@@ -75,12 +77,12 @@ for (int i = 0; i < awnsers.size(); i++)
 return (sumMax / max(m,n) * 1.0 ) * 100;
 }
 
-bool Animal::operator ==(Animal* obj)
+bool Animal::operator ==(Animal obj)
 {
 return (this->simularity(obj) > 70)? 1 : 0;
 }
 
-Animal* Animal::asexual_reproduction()
+Animal Animal::asexual_reproduction()
 {
     srand(time(0));
             cout <<"man injam !" << endl;
@@ -89,19 +91,22 @@ Animal* Animal::asexual_reproduction()
 
 while(1)
 {
-    Animal* tmp;
+    cout <<"man injam ! ! ! ! " << endl;
+    std::this_thread::sleep_until(std::chrono::system_clock::now() + std::chrono::seconds(1));
+    Animal tmp;
     vector<Genome> doubleCromozom = this->c.CHR;
     for(int i=0; i < this->c.CHR.size() ; i++)
     {
         doubleCromozom.push_back(this->c.CHR[i]);
     }
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine e(seed);
 
-    for(int i=0; i < this->c.CHR.size() ; i++)
-    {
-        int rand_num = rand()%doubleCromozom.size();
-        tmp->c.CHR.push_back(doubleCromozom[rand_num]);
-        doubleCromozom.erase(doubleCromozom.begin() + rand_num);
-    }
+    shuffle(doubleCromozom.begin(), doubleCromozom.end(), e);
+
+    for(int i=0;i < this->c.CHR.size();i++)
+        tmp.c.CHR.push_back(doubleCromozom[i]);
+
     cout << this->simularity(tmp);
     if(this->simularity(tmp) > 70)
     {
@@ -113,16 +118,16 @@ while(1)
 
 
 
-Animal* Animal::operator +(Animal* obj) 
+Animal Animal::operator +(Animal obj) 
 {
-    Animal* tmp = obj;
-    Animal* obj1 = this->asexual_reproduction();
-    Animal* obj2 = tmp->asexual_reproduction();
-while(1)
+    Animal obj1 = this->asexual_reproduction();
+    Animal obj2 = obj.asexual_reproduction();
+    
+for(int i=0 ;i < 200000000;i++)
 {
-    Animal* child;
-    vector<Genome> obj1_cp = obj1->c.CHR;
-    vector<Genome> obj2_cp = obj2->c.CHR;
+    Animal child;
+    vector<Genome> obj1_cp = obj1.c.CHR;
+    vector<Genome> obj2_cp = obj2.c.CHR;
 
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::default_random_engine e(seed);
@@ -130,21 +135,26 @@ while(1)
     shuffle(obj1_cp.begin(), obj1_cp.end(), e);
     shuffle(obj2_cp.begin(), obj2_cp.end(), e);
 
-    for(int i=0; i < obj1->c.CHR.size()/2;i++)
+    for(int i=0; i < obj1.c.CHR.size()/2;i++)
     {
         cout << "man injam baraye bar : " << i +1 << endl;
-        child->c.CHR.push_back(obj1->c.CHR[i]);
-        child->c.CHR.push_back(obj2->c.CHR[i]);
+        child.c.CHR.push_back(obj1.c.CHR[i]);
+        child.c.CHR.push_back(obj2.c.CHR[i]);
     }
 
-    if(child->simularity(obj1) > 70 && child->simularity(obj2) > 70)
+
+    if(child.simularity(obj1) > 70 && child.simularity(obj2) > 70)
     {
-        cout << "injaye" <<child->c.CHR.size() <<endl;
+        cout << "injaye" <<child.c.CHR.size() <<endl;
         return child;
+        
     }
+}
+Animal child;
 
+return child;
 }
-}
+
   
 void Animal::death()
 {
@@ -154,10 +164,10 @@ void Animal::death()
 
 
 
-bool Virus::canInfect(Animal* a)
+bool Virus::canInfect(Animal a)
 {
     vector<string> substrings;
-    substrings = a->c.getInterAll();
+    substrings = a.c.getInterAll();
 
     struct compare {
     inline bool operator()(const std::string& first,
