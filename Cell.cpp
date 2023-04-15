@@ -475,3 +475,63 @@ vector<string> Cell::getInterAll()
     return ans;
 
 }
+
+bool Cell:: check(string S1){
+    int m =S1.length();
+    for(int t=0;t<m/2;t++){
+        string S3=string(1,S1[m-t-1]);
+        string S2="";
+        for(int i=0;i<S3.length();i++){
+            if (S3[i]=='A'){
+                S2+='T';
+            }
+            else if (S3[i]=='T'){
+                S2+='A';
+            }
+            else if (S3[i]=='G'){
+                S2+='C';
+            }
+            else if (S3[i]=='C'){
+                S2+="G";
+            }
+        }
+        if(S1[t]!=S2[0]){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+}
+
+
+void Cell::palindrome(int n) {
+    for (int i=0;i<CHR[n].DNA1.length();i++) {
+        string p = "";
+        p += CHR[n].DNA1[i];
+        for (int j = i; j < CHR[n].DNA1.length() - 1; j++) {
+            p += CHR[n].DNA1[j + 1];
+            int a = p.length();
+            if (check(p) && a > 2 && a % 2 == 0) {
+                cout << p << endl;
+            }
+        }
+    }
+
+        for (int k=0;k<CHR[n].DNA1.length();k++){
+            string p2="";
+            p2+=CHR[n].DNA2[k];
+            for(int t=k;t<CHR[n].DNA1.length()-1;t++){
+                p2+=CHR[n].DNA2[t+1];
+                int b=p2.length();
+                if(check(p2) && b>2 && b%2==0){
+                    cout<<p2<<endl;
+                }
+            }
+
+
+    }
+
+
+
+};
