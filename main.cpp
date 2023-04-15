@@ -130,7 +130,7 @@ while(option != "0")
         cout << "How many Chromosomes you want to add to your animals' cell?" << endl;
         cout << "(After giving your number write your DNA strands)" << endl;
         getValidValue(n); // validating the value 
-        tmp->c.add(stoi(n));
+        AnimalList[AnimalList.size() - 1].c.add(stoi(n));
         cout << "Animal added ! ! !" << endl;
     }
     else if(option == "3")
