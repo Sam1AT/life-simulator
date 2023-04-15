@@ -79,7 +79,7 @@ int main(){
     string n,n2;
     string AnimalNametmp;
     vector<string> AnimalName;
-    vector<Animal*> AnimalList;
+    vector<Animal> AnimalList;
     string VirusNametmp;
     vector<string> VirusName;
     vector<Virus*> VirusList;
@@ -108,6 +108,8 @@ while(option != "0")
     cout << "11) Making a new Virus." << endl;
     cout << "12) Check Virus infection." << endl;
     cout << "13) Check the simularity between two animal." << endl;
+    cout << "14) Sexual reproduction for two animal." << endl;
+
 
     cout << "*** For exit please enter 0 ***" << endl;
     cout << "--------------------------------------------------------------------------------" << endl;
@@ -124,7 +126,7 @@ while(option != "0")
         getline(cin , AnimalNametmp);
         Animal* tmp = new Animal;
         AnimalName.push_back(AnimalNametmp);
-        AnimalList.push_back(tmp);
+        AnimalList.push_back(*tmp);
         cout << "How many Chromosomes you want to add to your animals' cell?" << endl;
         cout << "(After giving your number write your DNA strands)" << endl;
         getValidValue(n); // validating the value 
@@ -142,7 +144,7 @@ while(option != "0")
             cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
             goto a;
         }
-        AnimalList[stoi(n) - 1]->c.add(1);
+        AnimalList[stoi(n) - 1].c.add(1);
         cout << "Chromosome added ! ! !" << endl;
     }
     else if(option == "4")
@@ -172,7 +174,7 @@ while(option != "0")
         cin >> a >> b;
         getValidValue(c);
         getValidValue(d);
-        if(stoi(d) > AnimalList[stoi(n) - 1]->c.CHR.size() || stoi(d) <= 0)
+        if(stoi(d) > AnimalList[stoi(n) - 1].c.CHR.size() || stoi(d) <= 0)
         {
             cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
             goto c;
@@ -182,7 +184,7 @@ while(option != "0")
             cout << "! ! !   Enter a valid Nucleotide   ! ! !"<<endl;
             goto c;
         }
-        AnimalList[stoi(n) - 1]->c.jahesh_K_DNA(a, b , stoi(c) , stoi(d) - 1);
+        AnimalList[stoi(n) - 1].c.jahesh_K_DNA(a, b , stoi(c) , stoi(d) - 1);
     }
     else if(option == "6")
     {
@@ -203,17 +205,17 @@ while(option != "0")
         getValidSequence(b);
         getValidValue(c);
         getValidValue(d);
-        if(stoi(d) > AnimalList[stoi(n) - 1]->c.CHR.size() || stoi(d) <= 0)
+        if(stoi(d) > AnimalList[stoi(n) - 1].c.CHR.size() || stoi(d) <= 0)
         {
             cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
             goto f;
         }
-        if(stoi(c) > AnimalList[stoi(n) - 1]->c.CHR.size() || stoi(c) <= 0)
+        if(stoi(c) > AnimalList[stoi(n) - 1].c.CHR.size() || stoi(c) <= 0)
         {
             cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
             goto f;
         }
-        AnimalList[stoi(n) - 1]->c.jahesh_B_DNA(a,stoi(c) - 1   , b  , stoi(d) - 1);
+        AnimalList[stoi(n) - 1].c.jahesh_B_DNA(a,stoi(c) - 1   , b  , stoi(d) - 1);
     }
     else if(option == "7")
     {
@@ -221,6 +223,26 @@ while(option != "0")
     }
     else if(option == "8")
     {
+        
+        cout <<"Choose the animal that you want to see the palindrom " << endl;
+        listAllAnimals(AnimalName);
+        ew:
+        getValidValue(n); // validating the value 
+        if(stoi(n) > AnimalList.size() || stoi(n) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto ew;
+        }
+        aqqq:
+        string d;
+        cout << "Enter the number of chromose." << endl;
+        getValidValue(d);
+        if(stoi(d) > AnimalList[stoi(n) - 1].c.CHR.size() || stoi(d) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto aqqq;
+        }
+     AnimalList[stoi(n) - 1].c.palindrome(stoi(d) - 1);
 
     }
     else if(option == "9")
@@ -235,17 +257,17 @@ while(option != "0")
             goto q;
         }
         cout << "Animal name : " << AnimalName[stoi(n) - 1] << endl;
-        cout << "Chromosome count : " << AnimalList[stoi(n) - 1]->c.CHR.size() << endl;
+        cout << "Chromosome count : " << AnimalList[stoi(n) - 1].c.CHR.size() << endl;
         cout << "Do you want to see details about it chromosomes ?(y/n)" << endl;
         char opt;
         cin >> opt;
         if(opt == 'y' || opt == 'Y')
         {
-            for(int i=0;i < AnimalList[stoi(n) - 1]->c.CHR.size();i++)
+            for(int i=0;i < AnimalList[stoi(n) - 1].c.CHR.size();i++)
             {
                 cout << i+1 << " Chromosome : "<<endl;
-                cout<<"   The first DNA seq is : " <<AnimalList[stoi(n) - 1]->c.CHR[i].DNA1 << endl;
-                cout<<"   The second DNA seq is : " <<AnimalList[stoi(n) - 1]->c.CHR[i].DNA2 << endl;
+                cout<<"   The first DNA seq is : " <<AnimalList[stoi(n) - 1].c.CHR[i].DNA1 << endl;
+                cout<<"   The second DNA seq is : " <<AnimalList[stoi(n) - 1].c.CHR[i].DNA2 << endl;
             }
         }
     }
@@ -322,7 +344,45 @@ while(option != "0")
 
 
 
-        cout << "The simularity is : " << AnimalList[stoi(n) - 1]->simularity(AnimalList[stoi(n2) - 1])<<" percent." << endl;
+        cout << "The simularity is : " << AnimalList[stoi(n) - 1].simularity(AnimalList[stoi(n2) - 1])<<" percent." << endl;
+    }
+     else if(option == "14")
+    {
+        cout <<"Choose the first animal" << endl;
+        listAllAnimals(AnimalName);
+        oooii:
+        getValidValue(n); // validating the value 
+        if(stoi(n) > AnimalList.size() || stoi(n) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto oooii;
+        }
+
+        cout <<"Choose the Second one" << endl;
+        listAllAnimals(AnimalName);
+        oooi:
+        getValidValue(n2); // validating the value 
+        if(stoi(n2) > AnimalList.size() || stoi(n2) <= 0)
+        {
+            cout << "! ! !  Out of index ,enter another number   ! ! !" << endl;
+            goto oooi;
+        }
+
+        Animal t = AnimalList[stoi(n) -1] + AnimalList[stoi(n2) -1];
+        string sd;
+        if(t.c.CHR.size() != 0)
+        {
+            cout << "Enter a name for your new animal." << endl;
+            cin.ignore();
+            getline(cin , sd);
+            AnimalName.push_back(sd);
+            AnimalList.push_back(t);
+        }
+        else
+        {
+            cout << "! ! !  Can't make a new animal  ! ! !"<< endl;
+        }
+
     }
     else if(option != "0" || !isNumber(option))
     {
