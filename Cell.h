@@ -37,11 +37,12 @@ class Cell : Genome
     void jahesh_B_DNA(std::string,int,std::string,int  );
     void jahesh_K_DNA(std::string,std::string ,int,int);
     std::vector<std::string> getInterAll();
-    void palindrome(int );
+    void check(std::string S1);
+
     private:
     bool validateSequence(std::string seq);
     void getValidSequence(std::string &s);
-    bool check(std::string);
+    std::string get_complement(std::string s);
 
    friend class Animal;
     };

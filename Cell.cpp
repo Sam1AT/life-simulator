@@ -476,62 +476,35 @@ vector<string> Cell::getInterAll()
 
 }
 
-bool Cell:: check(string S1){
-    int m =S1.length();
-    for(int t=0;t<m/2;t++){
-        string S3=string(1,S1[m-t-1]);
-        string S2="";
-        for(int i=0;i<S3.length();i++){
-            if (S3[i]=='A'){
-                S2+='T';
-            }
-            else if (S3[i]=='T'){
-                S2+='A';
-            }
-            else if (S3[i]=='G'){
-                S2+='C';
-            }
-            else if (S3[i]=='C'){
-                S2+="G";
-            }
-        }
-        if(S1[t]!=S2[0]){
-            return false;
-        }
-        else{
-            return true;
+string Cell :: get_complement(string s) {
+    string complement = "";
+    for (int i = 0; i < s.length(); i++) {
+        if (s[i] == 'A') {
+            complement += 'T';
+        } else if (s[i] == 'T') {
+            complement += 'A';
+        } else if (s[i] == 'C') {
+            complement += 'G';
+        } else if (s[i] == 'G') {
+            complement += 'C';
         }
     }
+    return complement;
 }
 
 
-void Cell::palindrome(int n) {
-    for (int i=0;i<CHR[n].DNA1.length();i++) {
-        string p = "";
-        p += CHR[n].DNA1[i];
-        for (int j = i; j < CHR[n].DNA1.length() - 1; j++) {
-            p += CHR[n].DNA1[j + 1];
-            int a = p.length();
-            if (check(p) && a > 2 && a % 2 == 0) {
-                cout << p << endl;
-            }
-        }
+void Cell :: check(string S1){
+    for (int i = 0; i < S1.length() - 1; i++) {
+    for (int j = i + 2; j <= S1.length(); j++) {
+      string substring = S1.substr(i, j - i);
+      string complement = get_complement(substring);
+      if (substring == string(complement.rbegin(), complement.rend()) && substring.length()>2) {
+        cout << substring << endl;
+      }
     }
+  }
 
-        for (int k=0;k<CHR[n].DNA1.length();k++){
-            string p2="";
-            p2+=CHR[n].DNA2[k];
-            for(int t=k;t<CHR[n].DNA1.length()-1;t++){
-                p2+=CHR[n].DNA2[t+1];
-                int b=p2.length();
-                if(check(p2) && b>2 && b%2==0){
-                    cout<<p2<<endl;
-                }
-            }
-
-
-    }
+}
 
 
 
-};
