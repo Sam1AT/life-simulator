@@ -4,6 +4,6 @@ This project is written in C++ for Advanced Programming midterm project. These a
   - We have implemented object-oriented programming (OOP) principles and design patterns in the project.
   - The project also contains a CLI that can be use to intergate with the functions and features.
 
-For running the code you can use the commands below 👇 :
+For running the code you can use the command below 👇 :
 
 `g++ main.cpp && ./a.out`
