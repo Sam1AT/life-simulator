@@ -5,4 +5,4 @@ This project is written in C++ for Advanced Programming midterm project. These a
 
 For running the code you can use the commands below 👇 :
 
-<code>g++ main.cpp && ./a.out </code>
+`g++ main.cpp && ./a.out`
