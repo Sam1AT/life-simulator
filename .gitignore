@@ -2,3 +2,5 @@
 cMakeLists.txt
 /cmake-build-debug
 /tmp.cpp
+.idea
+.DS_Store
